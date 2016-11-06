@@ -1,0 +1,5 @@
+	Создание пула подключений:
+create-jdbc-connection-pool --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype javax.sql.DataSource --property portNumber=3306:password=ktvrshop:user=ktvrshop:serverName=localhost:databaseName=ktvrshop
+
+	Создание DataSource:
+create-jdbc-resource --connectionpoolid KTVRShopPool jdbc/KTVRShopDS
