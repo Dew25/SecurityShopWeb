@@ -43,7 +43,8 @@ public class PrivateController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(null != request.getServletPath())switch (request.getServletPath()) {
+        if(null != request.getServletPath())
+        switch (request.getServletPath()) {
             case "/addProduct":
                 
                 String seller_id = request.getParameter("seller_id");

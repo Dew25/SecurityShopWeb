@@ -22,11 +22,10 @@
     <security-constraint>
         <display-name>private_zone</display-name>
         <web-resource-collection>
-            <web-resource-name>private pages</web-resource-name>
+            <web-resource-name>User</web-resource-name>
             <description/>
             <url-pattern>/private/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
+            <url-pattern>/manager</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
