@@ -2,6 +2,7 @@ package entity;
 
 import util.ParseCode;
 import interfaces.People;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,14 @@ public class Person implements People {
     
     
     public Person() {
+    }
+
+    public Person(Long id, String firstname, String lastname, String code) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.code = code;
+        this.parseCode = new ParseCode(this.code);
     }
 
     public Person(String firstname, String lastname, String code) {
@@ -80,6 +89,31 @@ public class Person implements People {
 
     public String getGender() {
         return parseCode.getGender();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.code);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Person other = (Person) obj;
+        if (!Objects.equals(this.code, other.code)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

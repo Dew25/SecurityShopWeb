@@ -6,10 +6,16 @@
 package entity;
 
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -24,6 +30,12 @@ public class Product{
     private Integer price;
 
     public Product() {
+    }
+
+    public Product(Long id, String name, Integer price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
     }
 
     public Product(String name, Integer price) {
@@ -88,6 +100,8 @@ public class Product{
     public String toString() {
         return "Product{" + "name=" + name + ", price=" + price/100 + '}';
     }
+
+    
 
     
     

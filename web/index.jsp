@@ -1,24 +1,30 @@
-<%-- 
-    Document   : index
-    Created on : 06.11.2016, 14:52:58
-    Author     : jvm
---%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Магазин</title>
-    </head>
-    <body>
-        <h1>Товары ${title}</h1>
-        <div id="container">
-            <c:forEach var="product" items="${products}">
-                <a href="customer?product_id=${product.id}">${product.name} ${product.price}</a><br>
-            </c:forEach>
+<div id="top-title">Товары</div>
+        <div id="menu">
+            <a href="customer">Customer</a> <a href="seller">Seller</a> <a href="manager">Добавить продукт</a>
         </div>
-        
-    </body>
-</html>
+    <dir id="wrapper">
+        Покупатель: 
+        <c:forEach var="customer" items="${listPersons.customers}">
+            ${customer.firstname} ${customer.lastname}
+        </c:forEach>
+        <div id="container">
+            <ol>
+                <c:forEach var="seller" items="${listPersons.sellers}">
+                    Продавец: ${seller.firstname} ${seller.lastname}
+                    <li>
+                        <ul>
+                            <c:forEach var="product" items="${seller.products}">
+                                <li>
+                                    ${product.name} ${product.price} <a href="buy?product_id=${product.id}&seller_id=${seller.id}&customer_id=1">ÐÑÐ¿Ð¸ÑÑ</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+
+                    </li>
+                </c:forEach>
+            </ol>
+        </div>
+    </dir>
+
+

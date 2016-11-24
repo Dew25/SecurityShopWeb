@@ -34,6 +34,13 @@ public class Seller extends Person{
     public Seller() {
     }
 
+    public Seller(Long id, String nameShop, List<Product> products, String firstname, String lastname, String code) {
+        super(id, firstname, lastname, code);
+        this.id = id;
+        this.nameShop = nameShop;
+        this.products = products;
+    }
+
     public Seller(String nameShop, List<Product> products, String firstname, String lastname, String code) {
         super(firstname, lastname, code);
         this.nameShop = nameShop;

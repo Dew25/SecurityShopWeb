@@ -5,8 +5,10 @@
  */
 package session;
 
+import entity.Seller;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -59,6 +61,12 @@ public abstract class AbstractFacade<T> {
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
+    }
+     public T findByNames(String firstname,String lastname){
+        Query query = getEntityManager().createQuery("SELECT s FROM T s WHERE s.firstname=:firstname AND s.lastname=:lastname");
+        query.setParameter("firstname", firstname);
+        query.setParameter("lastname", lastname);
+        return (T) query.getSingleResult();
     }
     
 }

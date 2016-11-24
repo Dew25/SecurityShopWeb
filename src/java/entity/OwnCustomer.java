@@ -30,6 +30,12 @@ public class OwnCustomer {
         this.name = name;
         this.price = price;
     }
+
+    public OwnCustomer(Long id, String name, Integer price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
     
     public Long getId() {
         return id;
@@ -78,6 +84,14 @@ public class OwnCustomer {
     @Override
     public String toString() {
         return "OwnCustomer{" + "id=" + id + ", name=" + name + ", price=" + price + '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getPrice() {
+        return price;
     }
 
 

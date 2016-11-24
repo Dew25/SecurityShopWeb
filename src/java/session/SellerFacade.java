@@ -5,10 +5,13 @@
  */
 package session;
 
+import entity.Product;
 import entity.Seller;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +30,12 @@ public class SellerFacade extends AbstractFacade<Seller> {
 
     public SellerFacade() {
         super(Seller.class);
+    }
+    @RolesAllowed("user")
+    public void addProductToSeller(String sellerId,Product product){
+        Seller seller = em.find(Seller.class,Integer.parseInt(sellerId));
+        seller.getProducts().add(product);
+        em.persist(seller);
     }
     
 }

@@ -28,5 +28,9 @@ public class ProductFacade extends AbstractFacade<Product> {
     public ProductFacade() {
         super(Product.class);
     }
+
+    public Product find(Class<Product> aClass, Integer product_id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

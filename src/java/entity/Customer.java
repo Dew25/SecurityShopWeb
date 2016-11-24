@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,41 +26,47 @@ public class Customer extends Person{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
     @OneToMany(cascade = {CascadeType.ALL},orphanRemoval = true)
     @JoinColumn(name="CUSTOMER_ID")
-    private List<OwnCustomer>ownCustomers=new ArrayList<>();
+    private List<OwnCustomer>owns=new ArrayList<>();
     private Integer cash;
     
 
     public Customer() {
     }
 
-    public Customer(List<OwnCustomer> ownCustomers, Integer cash, String firstname, String lastname, String code) {
+    public Customer(Integer cash, String firstname, String lastname, String code) {
         super(firstname, lastname, code);
-        this.ownCustomers = ownCustomers;
+        this.id = id;
+        this.cash = cash;
+    }
+
+    public Customer(Long id, List<OwnCustomer> owns, Integer cash, String firstname, String lastname, String code) {
+        super(id,  firstname, lastname, code);
+        this.id=id;
+        this.owns = owns;
         this.cash = cash;
     }
     
-    @Override
+
     public Long getId() {
         return id;
     }
 
-    @Override
+
     public void setId(Long id) {
         this.id = id;
     }
     
-    public List<OwnCustomer> getOneCustomers() {
-        return ownCustomers;
+    public List<OwnCustomer> getOnes() {
+        return owns;
     }
 
     public Integer getCash() {
         return cash;
     }
-    public void setOneCustomers(List<OwnCustomer> ownCustomers) {
-        this.ownCustomers = ownCustomers;
+    public void setOnesCustomer(List<OwnCustomer> owns) {
+        this.owns = owns;
     }
 
     public void setCash(Integer cash) {
@@ -68,7 +75,7 @@ public class Customer extends Person{
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.ownCustomers);
+        hash = 79 * hash + Objects.hashCode(this.owns);
         hash = 79 * hash + Objects.hashCode(this.cash);
         return hash;
     }
@@ -89,7 +96,7 @@ public class Customer extends Person{
             return false;
         }
         final Customer other = (Customer) obj;
-        if (!Objects.equals(this.ownCustomers, other.ownCustomers)) {
+        if (!Objects.equals(this.owns, other.owns)) {
             return false;
         }
         if (!Objects.equals(this.cash, other.cash)) {
@@ -102,11 +109,19 @@ public class Customer extends Person{
     public String toString() {
         //для вывода списка продуктов необходимо перевести список в сторку товаров
         String strProducts = ""; // инициируем переменную типа String
-        for (int i = 0; i < ownCustomers.size(); i++) {//перебираем список продуктов
-            OwnCustomer ownCustomer = ownCustomers.get(i); //получаем очередной (i) продукт
+        for (int i = 0; i < owns.size(); i++) {//перебираем список продуктов
+            OwnCustomer ownCustomer = owns.get(i); //получаем очередной (i) продукт
             strProducts += ownCustomer.toString()+", ";//добавляем к строке (оператор +=) запись об очередном продукте
         }// строка со всеми продутами готова, используем ее в строке взврата.
         return "Customer{имя: "+super.getFirstname()+" "+super.getLastname() + ", products=" + strProducts + "cash=" + cash/100 + '}';
+    }
+
+    public List<OwnCustomer> getOwns() {
+        return owns;
+    }
+
+    public void setOwns(List<OwnCustomer> owns) {
+        this.owns = owns;
     }
 
 

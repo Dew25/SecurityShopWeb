@@ -3,10 +3,10 @@
   <persistence-unit name="KTVRShopWebPU" transaction-type="JTA">
     <jta-data-source>jdbc/KTVRShopDS</jta-data-source>
     <class>entity.Customer</class>
-    <class>entity.OwnCustomer</class>
     <class>entity.Person</class>
     <class>entity.Product</class>
     <class>entity.Seller</class>
+    <class>entity.OwnCustomer</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
